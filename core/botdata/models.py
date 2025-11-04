@@ -8,3 +8,13 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.id}"
+
+
+class Tariffs(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100, unique=True)
+    price = models.IntegerField(null=False)
+    days = models.IntegerField(null=False)
+
+    def __str__(self):
+        return f"{self.name}"
