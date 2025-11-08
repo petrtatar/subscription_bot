@@ -1,16 +1,33 @@
-# This is a sample Python script.
+from aiogram import Bot, Dispatcher, Router, types
+from aiogram.filters import Command
+from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
+                           InlineKeyboardMarkup, InlineKeyboardButton,
+                           ReplyKeyboardRemove)
 
-# Press ⌃F5 to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import State, StatesGroup
+import asyncio
+
+import os
+import sys
+import django
+from asgiref.sync import sync_to_async
+
+sys.path.append(os.path.join(os.path.dirname(__file__), 'core'))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
+django.setup()
+
+from botdata.models import UserProfile, Tariff
+
+bot = Bot(token=os.getenv("BOT_TOKEN"))
+dp = Dispatcher()
+router = Router()
+dp.include_router(router)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press F9 to toggle the breakpoint.
+async def main():
+    await dp.start_polling(bot)
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    asyncio.run(main())
