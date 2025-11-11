@@ -18,6 +18,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 django.setup()
 
 from botdata.models import UserProfile, Tariff
+from scheduler import start_scheduler
 
 bot = Bot(token=os.getenv("BOT_TOKEN"))
 dp = Dispatcher()
@@ -71,8 +72,9 @@ async def on_contact(message: types.Message) -> None:
     )
 
 
-
 async def main():
+    start_scheduler()
+
     await dp.start_polling(bot)
 
 

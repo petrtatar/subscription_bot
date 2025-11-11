@@ -21,3 +21,14 @@ class Tariff(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+
+class Broadcast(models.Model):
+    text = models.TextField(blank=True, null=True)
+    media = models.FileField(upload_to="broadcasts/", blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    send_at = models.DateTimeField(blank=True, null=True)
+    sent = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Рассылка {self.pk} ({'Отправлена' if self.sent else 'в очереди'})"
