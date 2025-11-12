@@ -8,6 +8,8 @@ class UserProfile(models.Model):
     full_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
+    subscription_expires_at = models.DateTimeField(null=True, blank=True)
+    bonus_balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return f"{self.pk}"
