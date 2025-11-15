@@ -1,11 +1,10 @@
-import asyncio
 import os
 from datetime import datetime, timezone
-from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from asgiref.sync import sync_to_async
 from botdata.models import Broadcast, UserProfile
 from aiogram import Bot
+from aiogram.types import FSInputFile
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -34,10 +33,11 @@ async def send_broadcast(broadcast):
     for u in users:
         try:
             if broadcast.media:
-                await bot.send_document(u.telegram_id, open(broadcast.media.path, "rb"), caption=broadcast.text or "")
+                await bot.send_photo(u.telegram_id, FSInputFile(broadcast.media.path), caption=broadcast.text or "")
             else:
                 await bot.send_message(u.telegram_id, broadcast.text or "")
-        except Exception:
+        except Exception as e:
+            print(f"Ошибка у {u.telegram_id}: {e}")
             continue
     await mark_sent(broadcast)
 

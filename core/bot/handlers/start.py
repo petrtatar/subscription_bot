@@ -10,7 +10,7 @@ router = Router()
 
 @router.message(Command("start"))
 async def on_start(message: types.Message) -> None:
-    get_user = get_user_by_tg_id(message.from_user.id)
+    get_user = await get_user_by_tg_id(message.from_user.id)
     if not get_user:
         u = message.from_user
         full = (u.full_name or " ".join([x for x in [u.first_name, u.last_name] if x]) or None)
