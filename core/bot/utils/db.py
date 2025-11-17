@@ -1,5 +1,5 @@
 from asgiref.sync import sync_to_async
-from botdata.models import UserProfile
+from core.botdata.models import UserProfile, Subscription
 
 
 @sync_to_async
@@ -22,3 +22,8 @@ def save_phone_by_tg_id(tg_id: int, phone: str) -> int:
 @sync_to_async
 def get_user_by_tg_id(tg_id: int) -> UserProfile | None:
     return UserProfile.objects.filter(telegram_id=tg_id).first()
+
+
+@sync_to_async
+def get_or_create_subscription(user):
+    return Subscription.objects.get_ot_create(user=user)

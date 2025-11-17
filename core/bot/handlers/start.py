@@ -4,6 +4,8 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
                            ReplyKeyboardRemove)
 from ..utils.db import upsert_profile, save_phone_by_tg_id, get_user_by_tg_id
 from ..keyboards.main_menu import main_menu_inline
+from ...botdata.models import Subscription
+from ..utils.db import get_or_create_subscription
 
 router = Router()
 

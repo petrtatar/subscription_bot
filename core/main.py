@@ -6,11 +6,11 @@ import sys
 import django
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'core'))
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.core.settings')
 django.setup()
 
-from bot.router import setup_router
-from scheduler import start_scheduler
+from core.bot.router import setup_router
+from core.scheduler import start_scheduler
 
 bot = Bot(token=os.getenv("BOT_TOKEN"))
 dp = Dispatcher()

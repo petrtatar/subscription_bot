@@ -2,7 +2,7 @@ import os
 from datetime import datetime, timezone
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from asgiref.sync import sync_to_async
-from botdata.models import Broadcast, UserProfile
+from core.botdata.models import Broadcast, UserProfile
 from aiogram import Bot
 from aiogram.types import FSInputFile
 from dotenv import load_dotenv

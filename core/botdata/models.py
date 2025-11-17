@@ -61,6 +61,10 @@ class Subscription(models.Model):
         self.is_active = False
         self.save()
 
+    def is_active_now(self):
+        now = timezone.now()
+        return self.is_active and self.end_date and self.end_date > now
+
     def __str__(self):
         return f"{self.pk}"
 
